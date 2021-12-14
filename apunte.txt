@@ -1,0 +1,50 @@
+Iniciando:
+npm init -y
+npm install express
+npm install dotenv
+npm install nodemon --save-dev
+crear y configurar  .gitignore y .env
+
+/////////////////////////////////////////////////////////////////////////////////////
+API : servicios http, generalmente el content-type es json, donde configuramos los metodos de peticiones
+como ejemplo vamos a ver una api de usuarios donde get: pido todos los usuarios; post: quiero persistir un nuevo usuario; put: actualizar un usuario....etc
+
+//////////////////////////////////////////////////////////////////////////////////
+Vamos a reorganizar el codigo
+
+CARPETA CONFIG
+verificamos si existe el .env y configuramos el ambiente
+
+Ambiente:
+especificamos donde vamos a ejecutar la app, dependiendo eso nos comportamos de una u otra manera:
+ej queremos meter logs en la app:
+Ambiente de desarrollo --> con que se haga en la consola es suficiente
+Servidor productivo --> deberia generar un archivo con el log, si en un futuro hay un error lo podemos verificar en el archivo
+
+--------------
+
+CARPETA LOADERS
+Para agregar todo lo que tiene que ejecutarse antes de que funcione la app
+Creamos una subCarpeta server para las configuraciones de express
+
+
+/////////////////////////////////////////
+dependencias agregadas:
+morgan: para ver por consola las entradas que tiene la api, get, post put,etc
+
+//////////////////////////////////////////////////////////////
+postman y heroku
+subimos el proyecto a heroku 
+desde postman creamos 2 ambientes uno de produccion(online heroku) y otro de desarrollo(este proyecto)
+dentro podemos crear variables con las rutas
+como basepath = https://c8-restserver.herokuapp.com/api/v1
+despues creamos un colleccion con todos los metodos y en las rutas ponemos
+{{basepath}}/users de esta forma no hay que cambiar entre localhost y la ruta de heroku
+postman tiene un desplegable para cambiar entre produccion y desarrollo
+
+//////////////////////////////////////////////////////////////////7
+libreria Winston guarda logs, mensajes
+depende el ambiente si es en desarrollo imprimimos los msj en la consola (reemplazamos los clg)
+si es en produccion en un archivo en una base de datos
+ej: un usuario me dice que en x momento tuvo un error
+puedo consultar en el archivo de logs el error exacto que tuvo el user
