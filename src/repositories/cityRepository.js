@@ -1,3 +1,4 @@
+///OBTENGO LOS DATOS DESDE LA API DE 3ROS
 const axios = require('axios');
 const config = require('../config/index');
 const logger = require('../loaders/logger');
