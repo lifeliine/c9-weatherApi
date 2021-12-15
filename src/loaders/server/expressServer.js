@@ -8,7 +8,7 @@ class ExpressServer {
     constructor() {
         this.app = express();
         this.port = config.port;
-        this.basePath = `${config.api.prefix}/users`;
+        this.basePath = `${config.api.prefix}/weather`;
         this._middelware();
         this._swaggerConfig();
         this._routes();
@@ -28,7 +28,7 @@ class ExpressServer {
             res.status(200).end();
         });
 
-        this.app.use(this.basePath, require('../../routes/usersRoutes'));
+        this.app.use(this.basePath, require('../../routes/weatherRoutes'));
     }
 
     _notFound(){
