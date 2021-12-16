@@ -6,14 +6,33 @@
 //6)Vuelvo a la capa controlers con la data lista para volver a routes 
 
 const express = require('express');
-const {findCities} = require('../services/cityService');
+const {findWeather,weatherById} = require('../services/weatherService');
+const Success = require('../handlers/successHandler');
+const logger = require('../loaders/logger');
 
-const cities = async function (req, res) {
-    res.json(await findCities(req.params.city));
+
+const weatherByCoordinates = async function (req, res) {
+    const { lon, lat } = req.query;
+    const weather = await findWeather(lon, lat);
+    const success = new Success(weather);
+
+    res.json(success);
 
 }
-  
 
+const weatherByCityId = async (req,res) => {
+    try {
+        const id = req.params.id;
+        const city = req.params.city;
+        const weather = await weatherById(city, id);
+        const success = new Success(weather);
+        res.json(success);
+    } catch (err) {
+        next(err);
+    }
+}
 module.exports = {
-      cities
+      weatherByCoordinates,
+      weatherByCityId 
+    
 }
