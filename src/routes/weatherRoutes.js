@@ -5,7 +5,7 @@ const {weatherByCoordinates,weatherByCityId} = require('../controlers/weatherCon
 const router = Router();
 
 router.get('/',weatherByCoordinates);
-router.get(':city/:id',weatherByCityId);
+router.get('/:city/:id',weatherByCityId);
 
 
 

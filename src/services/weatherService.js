@@ -1,6 +1,7 @@
 const WeatherRepository = require('../repositories/weatherRepository');
 const weatherRepository = new WeatherRepository();
 const CityRepository = require('../repositories/cityRepository');
+const logger= require('../loaders/logger');
 const cityRepository = new CityRepository();
  
 const findWeather = async(lon,lat) => {
@@ -15,14 +16,10 @@ const findWeather = async(lon,lat) => {
 
 const weatherById = async(city,id) => {
     const cities = await cityRepository.findCity(city);
-    console.log(cities);
-
     const cityData =  cities.features.find(e => e.id === id);
-
     const lon = cityData.geometry.coordinates[0];
     const lat = cityData.geometry.coordinates[1];
     return await findWeather(lon, lat);
-
 }
 
 module.exports = {

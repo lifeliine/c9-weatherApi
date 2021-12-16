@@ -7,11 +7,9 @@
 
 const express = require('express');
 const {findCities} = require('../services/cityService');
-const Success = require('../handlers/successHandler');
 
 const cities = async function (req, res) {
     res.json(await findCities(req.params.city));
-
 }
 
 module.exports = {
